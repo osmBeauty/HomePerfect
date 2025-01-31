@@ -1,0 +1,42 @@
+<% layout('layout/boilerPlate') %>
+
+<body>
+    <div class="container">
+        <div class="row d-flex justify-content-center mt-5">
+            <div class="col-5 all-form">
+                <form method="POST" action="/listing/<%= listings._id %>?_method=PUT" enctype="multipart/form-data">
+                    <h2 class="text-center">Edit Your Product</h2>
+                    <div class="mb-3">
+                        <label for="exampleInputTitle1" class="form-label">Title</label>
+                        <input type="text" name="listing[title]" value="<%= listings.title %>" class="form-control" id="exampleInputTitle1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputDescription1" class="form-label">Description</label>
+                        <input type="text" name="listing[description]" value="<%= listings.description %>" class="form-control" id="exampleInputDescription1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputDescription1" class="form-label">Category</label>
+                        <select name="listing[category]" id="exampleInputCategory1" class="form-control" required>
+                            <option selected disabled hidden><%= listings.category.name %></option>
+                            <% for(cat of category) { %>
+                                <option value="<%= cat._id %>"><%= cat.name %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputImage1" class="form-label">Image</label>
+                        <input type="file" name="listing[image]" value="<%= listings.image %>" class="form-control" id="exampleInputImage1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPrice1" class="form-label">Price</label>
+                        <input type="number" name="listing[price]" value="<%= listings.price %>" class="form-control" id="exampleInputPrice1">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+

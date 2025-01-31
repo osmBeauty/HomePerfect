@@ -1,0 +1,76 @@
+<ul class="nav nav-pills nav-fill text-bold"  style="background-color: #4B164C; color: white;">
+    <li class="nav-item">
+      <a class="nav-link" style="color: white;" href="#">Whatsapp</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="color: white;" href="#">Category</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="color: white;" href="#">Fast Delivery</a>
+    </li>
+</ul>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top first-nav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/listing"><img class="logo" src="/images/logo.png" alt="logo"></a>
+      <a class="navbar-brand nav-link" style="color: white;" href="/listing"><b>Home Perfects</b></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mx-auto">
+                <form action="/listing" method="get" class="d-flex ms-5">
+                    <input 
+                        type="text" 
+                        name="query" 
+                        class="form-control me-2 searchBar" 
+                        placeholder="Search Products" 
+                        aria-label="Search"
+                    >
+                    <button class="btn btn-outline-dark" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+        </div>
+
+        <div class="navbar-nav ms-auto navbar-links">
+            <% if(!currUser || currUser.role === "User"){ %>
+            <div class="position-relative me-4">
+                <a class="nav-link" href="/cart">
+                    <i class="fa-solid fa-cart-shopping cart-icon">
+                        <span class="position-absolute top-0 start-100 translate-middle badge cart-badge rounded-pill bg-warning"><%= cartNum || 0 %></span>
+                    </i>
+                </a>
+            </div>
+            <% } %>
+          <% if(!currUser) { %>
+            <a class="nav-link" href="/signUp"><b>SignUp</b></a>
+            <a class="nav-link" href="/login"><b>Login</b></a>
+          <% } %>
+          <% if(currUser) { %>
+            <% if(currUser.role == "Admin"){ %>
+                <a class="nav-link" href="/order/receivedOrder">Received Order</a>
+                <a class="nav-link" href="/listing/new">Add Product</a>
+                <a class="nav-link" href="/categories/newCategory">Add Category</a>
+            <% } %>
+            <% if(currUser.role == "User"){ %>
+                <a class="nav-link" href="/order/myOrder">My Orders</a>
+            <% } %>
+                <a class="nav-link" href="/logout"><b>Logout!</b></a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+</nav>   
+
+<ul class="nav second-nav">
+        <% categories.forEach(category => { %>
+            <li class="nav-item">
+                <a class="nav-link nav-icons" aria-current="page" href="/listing/category?category=<%= category._id %>">
+                    <div class="text-center">
+                        <i class="<%= category.icon %>"></i>
+                    </div>
+                    <p><%= category.name %></p>
+                </a>
+            </li>
+        <% }) %>
+    </ul>   
+</div>

@@ -1,0 +1,89 @@
+<% layout('layout/boilerPlate') %>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center m-4">
+            <div class="col-1"></div>
+            <div class="card col-4 mb-3 p-0 border-0">
+                <img src="<%= listings.image.url %>" class="card-img-top" alt="Product Image">
+            </div>
+            <div class="card-body col-4 ps-3">
+                <h3 class="card-title"><%= listings.title %></h3>
+                <p class="card-text mt-2"><%= listings.description %></p>
+                <p class="card-text"><b class="me-3">Price: </b> Rs. <%= listings.price %></p>
+                <p class="card-text"><b class="me-3">Category: </b><%= listings.category.name %></p>
+                <% if(currUser && currUser._id.equals(listings.owner._id)){ %>
+                    <div class="d-flex mt-5">
+                        <a href="/listing/<%= listings.id %>/edit" class="btn btn-success me-3 admin-buttons">Edit</a>
+                        <form method="POST" action="/listing/<%= listings.id %>?_method=DELETE">
+                            <button class="btn btn-warning admin-buttons">DELETE</button>
+                        </form>
+                    </div>
+                <% } %>
+                <% if(!currUser || currUser.role == "User"){ %>
+                <div class="m-0">
+                    <form action="/cart" method="POST">
+                      <input type="hidden" name="product" value="<%= listings.id %>">
+                      <button type="submit" class="btn btn-dark addtocart-button">Add to Cart</button>
+                    </form>
+                </div>
+                <% } %>
+            </div>
+            <div class="col-2"></div>
+            
+            <% if(currUser && currUser.role == "User"){ %>
+            <hr>
+            <div class="row-cols-12">
+                <div class="container">
+                <h4>Leave a Review</h4>
+                <form action="/listing/<%= listings._id %>/reviews" method="post">
+                    <div>
+                        <fieldset class="starability-slot">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <textarea placeholder="Enter Your Comment" rows="3" cols="50" id="comment" name="review[comment]" class="form-contrl mb-2" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <% } %>
+            <hr>
+                <div class="container">
+                    <h3>All Reviews For This Product</h3>
+                    <div class="row d-flex justify-content-center">
+                        <% for(review of listings.review){ %>
+                            <div class="card col-5 me-3 mb-3">
+                              <div class="row">
+                                <div class="card-body col-9 p-3">
+                                    <b style="font-size: large;">@ <%= review.author.username %></b>
+                                    <p class="starability-result" data-rating="<%= review.rating %>"></p>
+                                    <p class="card-text"><%= review.comment %></p>
+                                </div>
+                                <% if(currUser && currUser._id.equals(review.author._id)){ %>
+                                    <div class="ps-3 col-3 p-3 py-4">
+                                        <form method="post" action="/listing/<%= listings._id %>/reviews/<%= review._id %>?_method=DELETE">
+                                            <button class="btn btn-dark">DELETE</button>
+                                        </form>
+                                    </div>
+                                <% } %>
+                              </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

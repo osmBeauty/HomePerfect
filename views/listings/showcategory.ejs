@@ -1,0 +1,28 @@
+<% layout('layout/boilerPlate') %>
+<body>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <h5 class="text mt-4">Category: <b><%= category.name %></b></h5>
+
+            <% if (listings.length > 0) { %>
+                <% listings.forEach(listing => { %>
+                    <div class="card product-card col-3 p-0 m-3" style="width: 14rem;">
+                        <a href="/listing/<%= listing.id %>">
+                          <img src="<%= listing.image.url %>" class="card-img-top card-img" alt="Product Image">
+                        </a>
+                        <div class="card-body">
+                          <h5 class="card-title"><%= listing.title %></h5>
+                          <p class="card-text">Rs. <%= listing.price %></p>
+                          <p class="card-text"><%= listing.category.name %></p>
+                        </div>
+                        <div class="m-0">
+                          <a href="#" class="btn btn-primary card-button">Add to Cart</a>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No results found for category "<%= category %>".</p>
+            <% } %>
+        </div>
+    </div>
+</body>
