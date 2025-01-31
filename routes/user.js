@@ -5,6 +5,10 @@ const passport = require("passport");
 const {saveRedirectUrl} = require("../middleware.js");
 const userController = require("../controllers/user.js");
 
+// Index Page For Website
+router.get("/", (req, res)=>{
+    res.redirect("/listing");
+});
 
 // User SignUp Form
 router.get("/signUp", userController.renderSignupForm);
