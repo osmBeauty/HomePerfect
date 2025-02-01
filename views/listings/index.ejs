@@ -31,7 +31,7 @@
   <div class="container index-container">
     <div class="row d-flex justify-content-center index-row">
       <% for(let listing of allListing){ %>
-        <div class="card product-card col-3 p-0 m-3" style="width: 14rem;">
+        <div class="card product-card col-3 p-0 m-3">
           <a href="/listing/<%= listing.id %>">
             <img src="<%= listing.image.url %>" class="card-img-top card-img" alt="Product Image">
           </a>
