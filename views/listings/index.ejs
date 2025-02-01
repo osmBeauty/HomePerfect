@@ -28,24 +28,24 @@
     <!-- End of Carasoul -->
 
     <!-- Start of Products -->
-  <div class="container">
-    <div class="row d-flex justify-content-center">
+  <div class="container index-container">
+    <div class="row d-flex justify-content-center index-row">
       <% for(let listing of allListing){ %>
         <div class="card product-card col-3 p-0 m-3" style="width: 14rem;">
           <a href="/listing/<%= listing.id %>">
             <img src="<%= listing.image.url %>" class="card-img-top card-img" alt="Product Image">
           </a>
           <div class="card-body">
-            <h5 class="card-title"><%= listing.title %></h5>
-            <p class="card-text">Category: &nbsp;&nbsp;
-              <a class="text-warning" href="/listing/category?category=<%= listing.category._id %>">
+            <h5 class="card-title product-font"><%= listing.title %></h5>
+            <p class="card-text product-font">Category: &nbsp;&nbsp;
+              <a class="text-warning product-font" href="/listing/category?category=<%= listing.category._id %>">
                 <%= listing.category.name %>
               </a>
             </p>
-            <p class="card-text text-center"><b>Rs. <%= listing.price %></b></p>
+            <p class="card-text text-center product-font"><b>Rs. <%= listing.price %></b></p>
           </div>
           <div class="m-0">
-            <a href="/listing/<%= listing.id %>" type="submit" class="btn card-button">Buy Now</a>
+            <a href="/listing/<%= listing.id %>" type="submit" class="btn card-button product-font">Buy Now</a>
           </div>
         </div>
       <% } %>
