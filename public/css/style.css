@@ -42,9 +42,15 @@
     width: 22rem;
 }
 
+/* Caresoul */
+.carousel{
+    height: 13rem;
+}
+
 /* Product Styling */
 
 .product-card{
+    width: 14rem;
     border-radius: 1rem;
     border-radius: 1rem;
 }
@@ -178,6 +184,9 @@ table, th, td {
     
 }
 @media (max-width: 550px) {
+    .carousel{
+        height: 6rem;
+    }
     .index-container{
         margin: auto;
     }
@@ -200,7 +209,6 @@ table, th, td {
         padding: auto;
     }
 }
-
 
 /* Product Styling */
 
